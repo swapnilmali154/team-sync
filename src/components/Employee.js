@@ -26,6 +26,7 @@ const Employee = () => {
   });
 
   const [empList, setEmpList] = useState([]);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   useEffect(() => {
     getEmployees();
@@ -42,9 +43,59 @@ const Employee = () => {
   };
 
   const saveEmployee = () => {
-    createEmployee(empObj).then((result) => {
+    setIsFormSubmitted(true);
+    if (
+      empObj.empName !== "" &&
+      empObj.empContactNo !== "" &&
+      empObj.accountNo !== "" &&
+      empObj.addressLine1 !== "" &&
+      empObj.addressLine2 !== "" &&
+      empObj.bankBranch !== "" &&
+      empObj.bankName !== "" &&
+      empObj.city !== "" &&
+      empObj.empAltContactNo !== "" &&
+      empObj.empEmail !== "" &&
+      empObj.pincode !== "" &&
+      empObj.state !== "" &&
+      empObj.ifsc !== "" &&
+      empObj.salary !== ""
+    ) {
+      createEmployee(empObj).then((result) => {
+        if (result.result) {
+          alert("Employee created successfully");
+          getEmployees();
+          setEmpObj({
+            empId: 0,
+            empName: "",
+            empContactNo: "",
+            empAltContactNo: "",
+            empEmail: "",
+            addressLine1: "",
+            addressLine2: "",
+            pincode: "",
+            city: "",
+            state: "",
+            bankName: "",
+            ifsc: "",
+            accountNo: "",
+            bankBranch: "",
+            salary: 0,
+          });
+        } else {
+          alert(result.message);
+        }
+      });
+    }
+  };
+
+  const onEdit = (empObj) => {
+    setEmpObj(empObj);
+  };
+
+  const updateEmp = () => {
+    updateEmployee(empObj).then((result) => {
       if (result.result) {
-        alert("Employee created successfully");
+        alert("Employee Updated Successfully");
         getEmployees();
         setEmpObj({
           empId: 0,
@@ -69,38 +120,6 @@ const Employee = () => {
     });
   };
 
-  const onEdit = (empObj) => {
-    setEmpObj(empObj);
-  };
-
-  const updateEmp = () => {
-    updateEmployee(empObj).then((result) => {
-      if (result.result) {
-        alert("Employee Updated Successfully");
-        getEmployees();
-        setEmpObj({
-            empId: 0,
-            empName: "",
-            empContactNo: "",
-            empAltContactNo: "",
-            empEmail: "",
-            addressLine1: "",
-            addressLine2: "",
-            pincode: "",
-            city: "",
-            state: "",
-            bankName: "",
-            ifsc: "",
-            accountNo: "",
-            bankBranch: "",
-            salary: 0,
-          });
-      } else {
-        alert(result.message);
-      }
-    });
-  };
-
   const onDelete = (empId) => {
     deleteEmployee(empId).then((result) => {
       if (result.result) {
@@ -109,6 +128,27 @@ const Employee = () => {
       } else {
         alert(result.message);
       }
+    });
+  };
+
+  const onReset = () => {
+    setIsFormSubmitted(false)
+    setEmpObj({
+      empId: 0,
+      empName: "",
+      empContactNo: "",
+      empAltContactNo: "",
+      empEmail: "",
+      addressLine1: "",
+      addressLine2: "",
+      pincode: "",
+      city: "",
+      state: "",
+      bankName: "",
+      ifsc: "",
+      accountNo: "",
+      bankBranch: "",
+      salary: 0,
     });
   };
 
@@ -128,6 +168,9 @@ const Employee = () => {
                 onChange={(event) => updateFormValue(event, "empName")}
                 placeholder="Name"
               />
+              {isFormSubmitted && empObj.empName === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
             </div>
             <div className="col-4">
               <label>Contact No:</label>
@@ -138,6 +181,9 @@ const Employee = () => {
                 onChange={(event) => updateFormValue(event, "empContactNo")}
                 placeholder="Contact No"
               />
+              {isFormSubmitted && empObj.empContactNo === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
             </div>
             <div className="col-4">
               <label>Alt Contact No:</label>
@@ -148,6 +194,9 @@ const Employee = () => {
                 onChange={(event) => updateFormValue(event, "empAltContactNo")}
                 placeholder="Alt Contact No"
               />
+              {isFormSubmitted && empObj.empAltContactNo === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
             </div>
           </div>
           <div className="row pt-2">
@@ -160,6 +209,9 @@ const Employee = () => {
                 onChange={(event) => updateFormValue(event, "empEmail")}
                 placeholder="Email"
               />
+              {isFormSubmitted && empObj.empEmail === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
             </div>
             <div className="col-4">
               <label>Address Line 1:</label>
@@ -170,6 +222,9 @@ const Employee = () => {
                 onChange={(event) => updateFormValue(event, "addressLine1")}
                 placeholder="Address Line 1"
               />
+              {isFormSubmitted && empObj.addressLine1 === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
             </div>
             <div className="col-4">
               <label>Address Line 2:</label>
@@ -180,6 +235,9 @@ const Employee = () => {
                 onChange={(event) => updateFormValue(event, "addressLine2")}
                 placeholder="Address Line 2"
               />
+              {isFormSubmitted && empObj.addressLine2 === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
             </div>
           </div>
           <div className="row pt-2">
@@ -192,6 +250,9 @@ const Employee = () => {
                 onChange={(event) => updateFormValue(event, "pincode")}
                 placeholder="Pincode"
               />
+              {isFormSubmitted && empObj.pincode === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
             </div>
             <div className="col-4">
               <label>City:</label>
@@ -202,6 +263,9 @@ const Employee = () => {
                 onChange={(event) => updateFormValue(event, "city")}
                 placeholder="City"
               />
+              {isFormSubmitted && empObj.city === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
             </div>
             <div className="col-4">
               <label>State</label>
@@ -212,6 +276,9 @@ const Employee = () => {
                 onChange={(event) => updateFormValue(event, "state")}
                 placeholder="State"
               />
+              {isFormSubmitted && empObj.state === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
             </div>
           </div>
           <div className="row pt-2">
@@ -224,6 +291,9 @@ const Employee = () => {
                 onChange={(event) => updateFormValue(event, "bankName")}
                 placeholder="Bank Name"
               />
+              {isFormSubmitted && empObj.bankName === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
             </div>
             <div className="col-4">
               <label>IFSC:</label>
@@ -234,6 +304,9 @@ const Employee = () => {
                 onChange={(event) => updateFormValue(event, "ifsc")}
                 placeholder="IFSC"
               />
+              {isFormSubmitted && empObj.ifsc === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
             </div>
             <div className="col-4">
               <label>Account No:</label>
@@ -244,6 +317,9 @@ const Employee = () => {
                 onChange={(event) => updateFormValue(event, "accountNo")}
                 placeholder="Account No"
               />
+              {isFormSubmitted && empObj.accountNo === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
             </div>
           </div>
           <div className="row pt-2">
@@ -256,6 +332,9 @@ const Employee = () => {
                 onChange={(event) => updateFormValue(event, "bankBranch")}
                 placeholder="Bank Branch"
               />
+              {isFormSubmitted && empObj.bankBranch === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
             </div>
             <div className="col-4">
               <label>Salary:</label>
@@ -266,11 +345,16 @@ const Employee = () => {
                 onChange={(event) => updateFormValue(event, "salary")}
                 placeholder="Salary"
               />
+              {isFormSubmitted && empObj.salary === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
             </div>
             <div className="col-4">
               <div className="row pt-4">
                 <div className="col-3">
-                  <button className="btn btn-primary">Reset</button>
+                  <button className="btn btn-primary" onClick={onReset}>
+                    Reset
+                  </button>
                 </div>
                 <div className="col-3">
                   {empObj.empId === 0 && (
