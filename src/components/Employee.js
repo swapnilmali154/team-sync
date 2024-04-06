@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { getAllEmployee, createEmployee, updateEmployee, deleteEmployee} from "../services/ApiService";
+import {
+  getAllEmployee,
+  createEmployee,
+  updateEmployee,
+  deleteEmployee,
+} from "../services/ApiService";
 
 const Employee = () => {
   const [empObj, setEmpObj] = useState({
-    EmpId: 0,
-    EmpName: "",
-    EmpContactNo: "",
-    EmpAltContactNo: "",
-    EmpEmail: "",
-    AddressLine1: "",
-    AddressLine2: "",
-    Pincode: "",
-    City: "",
-    State: "",
-    BankName: "",
-    IFSC: "",
-    AccountNo: "",
-    BankBranch: "",
-    Salary: 0,
+    empId: 0,
+    empName: "",
+    empContactNo: "",
+    empAltContactNo: "",
+    empEmail: "",
+    addressLine1: "",
+    addressLine2: "",
+    pincode: "",
+    city: "",
+    state: "",
+    bankName: "",
+    ifsc: "",
+    accountNo: "",
+    bankBranch: "",
+    salary: 0,
   });
 
   const [empList, setEmpList] = useState([]);
@@ -42,21 +47,21 @@ const Employee = () => {
         alert("Employee created successfully");
         getEmployees();
         setEmpObj({
-          EmpId: 0,
-          EmpName: "",
-          EmpContactNo: "",
-          EmpAltContactNo: "",
-          EmpEmail: "",
-          AddressLine1: "",
-          AddressLine2: "",
-          Pincode: "",
-          City: "",
-          State: "",
-          BankName: "",
-          IFSC: "",
-          AccountNo: "",
-          BankBranch: "",
-          Salary: 0,
+          empId: 0,
+          empName: "",
+          empContactNo: "",
+          empAltContactNo: "",
+          empEmail: "",
+          addressLine1: "",
+          addressLine2: "",
+          pincode: "",
+          city: "",
+          state: "",
+          bankName: "",
+          ifsc: "",
+          accountNo: "",
+          bankBranch: "",
+          salary: 0,
         });
       } else {
         alert(result.message);
@@ -64,28 +69,48 @@ const Employee = () => {
     });
   };
 
-  const onEdit = () => {
-    debugger;
-    updateEmployee(empObj).then(result => {
-        if(result.result){
-            alert("Employee Updated Successfully")
-            getEmployees();
-        } else {
-            alert(result.message)
-        }
-    })
-  }
+  const onEdit = (empObj) => {
+    setEmpObj(empObj);
+  };
+
+  const updateEmp = () => {
+    updateEmployee(empObj).then((result) => {
+      if (result.result) {
+        alert("Employee Updated Successfully");
+        getEmployees();
+        setEmpObj({
+            empId: 0,
+            empName: "",
+            empContactNo: "",
+            empAltContactNo: "",
+            empEmail: "",
+            addressLine1: "",
+            addressLine2: "",
+            pincode: "",
+            city: "",
+            state: "",
+            bankName: "",
+            ifsc: "",
+            accountNo: "",
+            bankBranch: "",
+            salary: 0,
+          });
+      } else {
+        alert(result.message);
+      }
+    });
+  };
 
   const onDelete = (empId) => {
-    deleteEmployee(empId).then(result => {
-        if(result.result){
-            alert("Employee Deleted Successfully")
-            getEmployees();
-        } else {
-            alert(result.message)
-        }
-    })
-  }
+    deleteEmployee(empId).then((result) => {
+      if (result.result) {
+        alert("Employee Deleted Successfully");
+        getEmployees();
+      } else {
+        alert(result.message);
+      }
+    });
+  };
 
   return (
     <div>
@@ -99,8 +124,8 @@ const Employee = () => {
               <input
                 type="text"
                 className="form-control"
-                value={empObj.EmpName}
-                onChange={(event) => updateFormValue(event, "EmpName")}
+                value={empObj.empName}
+                onChange={(event) => updateFormValue(event, "empName")}
                 placeholder="Name"
               />
             </div>
@@ -109,8 +134,8 @@ const Employee = () => {
               <input
                 type="text"
                 className="form-control"
-                value={empObj.EmpContactNo}
-                onChange={(event) => updateFormValue(event, "EmpContactNo")}
+                value={empObj.empContactNo}
+                onChange={(event) => updateFormValue(event, "empContactNo")}
                 placeholder="Contact No"
               />
             </div>
@@ -119,8 +144,8 @@ const Employee = () => {
               <input
                 type="text"
                 className="form-control"
-                value={empObj.EmpAltContactNo}
-                onChange={(event) => updateFormValue(event, "EmpAltContactNo")}
+                value={empObj.empAltContactNo}
+                onChange={(event) => updateFormValue(event, "empAltContactNo")}
                 placeholder="Alt Contact No"
               />
             </div>
@@ -131,8 +156,8 @@ const Employee = () => {
               <input
                 type="text"
                 className="form-control"
-                value={empObj.EmpEmail}
-                onChange={(event) => updateFormValue(event, "EmpEmail")}
+                value={empObj.empEmail}
+                onChange={(event) => updateFormValue(event, "empEmail")}
                 placeholder="Email"
               />
             </div>
@@ -141,8 +166,8 @@ const Employee = () => {
               <input
                 type="text"
                 className="form-control"
-                value={empObj.AddressLine1}
-                onChange={(event) => updateFormValue(event, "AddressLine1")}
+                value={empObj.addressLine1}
+                onChange={(event) => updateFormValue(event, "addressLine1")}
                 placeholder="Address Line 1"
               />
             </div>
@@ -151,8 +176,8 @@ const Employee = () => {
               <input
                 type="text"
                 className="form-control"
-                value={empObj.AddressLine2}
-                onChange={(event) => updateFormValue(event, "AddressLine2")}
+                value={empObj.addressLine2}
+                onChange={(event) => updateFormValue(event, "addressLine2")}
                 placeholder="Address Line 2"
               />
             </div>
@@ -163,8 +188,8 @@ const Employee = () => {
               <input
                 type="text"
                 className="form-control"
-                value={empObj.Pincode}
-                onChange={(event) => updateFormValue(event, "Pincode")}
+                value={empObj.pincode}
+                onChange={(event) => updateFormValue(event, "pincode")}
                 placeholder="Pincode"
               />
             </div>
@@ -173,8 +198,8 @@ const Employee = () => {
               <input
                 type="text"
                 className="form-control"
-                value={empObj.City}
-                onChange={(event) => updateFormValue(event, "City")}
+                value={empObj.city}
+                onChange={(event) => updateFormValue(event, "city")}
                 placeholder="City"
               />
             </div>
@@ -183,8 +208,8 @@ const Employee = () => {
               <input
                 type="text"
                 className="form-control"
-                value={empObj.State}
-                onChange={(event) => updateFormValue(event, "State")}
+                value={empObj.state}
+                onChange={(event) => updateFormValue(event, "state")}
                 placeholder="State"
               />
             </div>
@@ -195,8 +220,8 @@ const Employee = () => {
               <input
                 type="text"
                 className="form-control"
-                value={empObj.BankName}
-                onChange={(event) => updateFormValue(event, "BankName")}
+                value={empObj.bankName}
+                onChange={(event) => updateFormValue(event, "bankName")}
                 placeholder="Bank Name"
               />
             </div>
@@ -205,8 +230,8 @@ const Employee = () => {
               <input
                 type="text"
                 className="form-control"
-                value={empObj.IFSC}
-                onChange={(event) => updateFormValue(event, "IFSC")}
+                value={empObj.ifsc}
+                onChange={(event) => updateFormValue(event, "ifsc")}
                 placeholder="IFSC"
               />
             </div>
@@ -215,8 +240,8 @@ const Employee = () => {
               <input
                 type="text"
                 className="form-control"
-                value={empObj.AccountNo}
-                onChange={(event) => updateFormValue(event, "AccountNo")}
+                value={empObj.accountNo}
+                onChange={(event) => updateFormValue(event, "accountNo")}
                 placeholder="Account No"
               />
             </div>
@@ -227,8 +252,8 @@ const Employee = () => {
               <input
                 type="text"
                 className="form-control"
-                value={empObj.BankBranch}
-                onChange={(event) => updateFormValue(event, "BankBranch")}
+                value={empObj.bankBranch}
+                onChange={(event) => updateFormValue(event, "bankBranch")}
                 placeholder="Bank Branch"
               />
             </div>
@@ -237,8 +262,8 @@ const Employee = () => {
               <input
                 type="text"
                 className="form-control"
-                value={empObj.Salary}
-                onChange={(event) => updateFormValue(event, "Salary")}
+                value={empObj.salary}
+                onChange={(event) => updateFormValue(event, "salary")}
                 placeholder="Salary"
               />
             </div>
@@ -248,9 +273,16 @@ const Employee = () => {
                   <button className="btn btn-primary">Reset</button>
                 </div>
                 <div className="col-3">
-                  <button className="btn btn-success" onClick={saveEmployee}>
-                    Save
-                  </button>
+                  {empObj.empId === 0 && (
+                    <button className="btn btn-success" onClick={saveEmployee}>
+                      Save
+                    </button>
+                  )}
+                  {empObj.empId !== 0 && (
+                    <button className="btn btn-warning" onClick={updateEmp}>
+                      Update
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -301,8 +333,18 @@ const Employee = () => {
                     <td>{emp.bankBranch}</td>
                     <td>{emp.salary}</td>
                     <td>
-                      <button className="btn btn-sm btn-success" onClick={() => onEdit(emp)}>Edit</button>
-                      <button className="btn btn-sm btn-primary" onClick={() => onDelete(emp.empId)}>Delete</button>
+                      <button
+                        className="btn btn-sm btn-success"
+                        onClick={() => onEdit(emp)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn btn-sm btn-primary"
+                        onClick={() => onDelete(emp.empId)}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 );
