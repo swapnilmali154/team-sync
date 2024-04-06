@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import {getAllEmployee} from '../services/ApiService'
 
 const Employee = () => {
 
@@ -18,10 +19,22 @@ const Employee = () => {
         "AccountNo": "",
         "BankBranch": "",
         "Salary": 0
-      })
+      });
+    
+    const [empList, setEmpList] = useState([]);
+
+    useEffect(()=>{
+        getEmployees();
+    }, [])
+
+    const getEmployees = () => {
+        getAllEmployee().then(result => {
+            setEmpList(result.data)
+        })
+    }
 
     const updateFormValue = (event, key) => {
-        setEmpObj(prevObj => ({...prevObj, [key]: event.target.value }))
+        setEmpObj((prevObj) => ({...prevObj, [key]: event.target.value }))
     }
 
     return (
@@ -99,6 +112,7 @@ const Employee = () => {
                 <table className='table table-bordered'>
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Name</th>
                             <th>Contact No</th>
                             <th>Alt Contact No</th>
@@ -117,7 +131,29 @@ const Employee = () => {
                         </tr>
                     </thead>
                     <tbody>
-
+                        {empList.map((emp, index)=>{
+                            return (<tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{emp.empName}</td>
+                                <td>{emp.empContactNo}</td>
+                                <td>{emp.empAltContactNo}</td>
+                                <td>{emp.empEmail}</td>
+                                <td>{emp.addressLine1}</td>
+                                <td>{emp.addressLine2}</td>
+                                <td>{emp.pincode}</td>
+                                <td>{emp.city}</td>
+                                <td>{emp.state}</td>
+                                <td>{emp.bankName}</td>
+                                <td>{emp.ifsc}</td>
+                                <td>{emp.accountNo}</td>
+                                <td>{emp.bankBranch}</td>
+                                <td>{emp.salary}</td>
+                                <td>
+                                    <button>Edit</button>
+                                    <button>Delete</button>
+                                </td>
+                            </tr>)
+                        })}
                     </tbody>
                 </table>
             </div>
