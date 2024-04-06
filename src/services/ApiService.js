@@ -11,4 +11,14 @@ const getAllEmployee = async () => {
 }
 
 
-export { getAllEmployee }
+const createEmployee = async (data) => {
+    try {
+        const response = await axios.post(`${API_URL}CreateEmployee`, data)
+        return response.data;
+    } catch (error) {
+        alert("Api Error")
+    }
+}
+
+
+export { getAllEmployee, createEmployee }
