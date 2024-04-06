@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllEmployee, createEmployee } from "../services/ApiService";
+import { getAllEmployee, createEmployee, updateEmployee, deleteEmployee} from "../services/ApiService";
 
 const Employee = () => {
   const [empObj, setEmpObj] = useState({
@@ -63,6 +63,29 @@ const Employee = () => {
       }
     });
   };
+
+  const onEdit = () => {
+    debugger;
+    updateEmployee(empObj).then(result => {
+        if(result.result){
+            alert("Employee Updated Successfully")
+            getEmployees();
+        } else {
+            alert(result.message)
+        }
+    })
+  }
+
+  const onDelete = (empId) => {
+    deleteEmployee(empId).then(result => {
+        if(result.result){
+            alert("Employee Deleted Successfully")
+            getEmployees();
+        } else {
+            alert(result.message)
+        }
+    })
+  }
 
   return (
     <div>
@@ -278,8 +301,8 @@ const Employee = () => {
                     <td>{emp.bankBranch}</td>
                     <td>{emp.salary}</td>
                     <td>
-                      <button>Edit</button>
-                      <button>Delete</button>
+                      <button className="btn btn-sm btn-success" onClick={() => onEdit(emp)}>Edit</button>
+                      <button className="btn btn-sm btn-primary" onClick={() => onDelete(emp.empId)}>Delete</button>
                     </td>
                   </tr>
                 );

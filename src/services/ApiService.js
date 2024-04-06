@@ -20,5 +20,26 @@ const createEmployee = async (data) => {
     }
 }
 
+const updateEmployee = async (data) => {
+    try {
+        debugger;
+        const response = await axios.post(`${API_URL}UpdateEmployee`, data)
+        debugger;
+        return response.data;
+    } catch (error) {
+        debugger;
+        alert("Api Error")
+    }
+}
 
-export { getAllEmployee, createEmployee }
+const deleteEmployee = async (id) =>{
+    try {
+        const response = await axios.get(`${API_URL}DeleteEmployeeByEmpId?empid=`+ id)
+        return response.data;
+    } catch (error) {
+        alert("Api Error")
+    }
+}
+
+
+export { getAllEmployee, createEmployee, updateEmployee, deleteEmployee }
