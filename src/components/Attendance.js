@@ -59,8 +59,8 @@ const Attendance = () => {
     });
   };
 
-  const onEdit = (empObj) => {
-    setAttendanceObj(empObj);
+  const onEdit = (attendObj) => {
+    setAttendanceObj(attendObj);
   };
 
   const updateAttendance = () => {
@@ -160,8 +160,6 @@ const Attendance = () => {
                 <div className="text-danger">This is required.</div>
               )}
             </div>
-          </div>
-          <div className="row pt-2">
             <div className="col-4">
               <div className="row pt-4">
                 <div className="col-3">

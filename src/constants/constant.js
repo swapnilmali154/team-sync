@@ -10,8 +10,8 @@ export const CREATE_ATTENDANCE_ENDPOINT = "AddAttendance";
 export const UPDATE_ATTENDANCE_ENDPOINT = "UpdateAttendance";
 export const DELETE_ATTENDANCE_ENDPOINT = "DeleteAttendanceById?attendanceid=";
 
-export const GET_ADVANCE_ENDPOINT = "";
-export const CREATE_ADVANCE_ENDPOINT = "";
-export const UPDATE_ADVANCE_ENDPOINT = "";
-export const DELETE_ADVANCE_ENDPOINT = "";
+export const GET_ADVANCE_ENDPOINT = "GetAllAdvance";
+export const CREATE_ADVANCE_ENDPOINT = "AddAdvance";
+export const UPDATE_ADVANCE_ENDPOINT = "UpdateAdvance";
+export const DELETE_ADVANCE_ENDPOINT = "DeleteAdvanceById?advanceid=";
 
