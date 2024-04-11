@@ -1,87 +1,40 @@
 import axios from "axios";
-import {API_URL} from "../constants/constant";
+import { API_URL } from "../constants/constant";
 
-const getAllEmployee = async () => {
+const getData = async (endpoint) => {
   try {
-    const response = await axios.get(`${API_URL}GetAllEmployee`);
+    const response = await axios.get(`${API_URL}${endpoint}`);
     return response.data;
   } catch (error) {
     alert("Api Error");
   }
 };
 
-const createEmployee = async (data) => {
+const createData = async (endpoint, data) => {
   try {
-    const response = await axios.post(`${API_URL}CreateEmployee`, data);
+    const response = await axios.post(`${API_URL}${endpoint}`, data);
     return response.data;
   } catch (error) {
     alert("Api Error");
   }
 };
 
-const updateEmployee = async (data) => {
+const updateData = async (endpoint, data) => {
   try {
-    const response = await axios.post(`${API_URL}UpdateEmployee`, data);
+    const response = await axios.post(`${API_URL}${endpoint}`, data);
     return response.data;
   } catch (error) {
     alert("Api Error");
   }
 };
 
-const deleteEmployee = async (id) => {
+const deleteData = async (endpoint, id) => {
   try {
-    const response = await axios.get(
-      `${API_URL}DeleteEmployeeByEmpId?empid=` + id
-    );
+    const response = await axios.get(`${API_URL}${endpoint}` + id);
     return response.data;
   } catch (error) {
     alert("Api Error");
   }
 };
 
-const getAllAttendance = async () => {
-  try {
-    const response = await axios.get(`${API_URL}GetAllAttendance`);
-    return response.data;
-  } catch (error) {
-    alert("Api Error");
-  }
-};
-
-const addAttendance = async (data) => {
-  try {
-    const response = await axios.post(`${API_URL}AddAttendance`, data);
-    return response.data;
-  } catch (error) {
-    alert("Api Error");
-  }
-};
-
-const updateAttendance = async (data) => {
-  try {
-    const response = await axios.post(`${API_URL}UpdateAttendance`, data);
-    return response.data;
-  } catch (error) {
-    alert("Api Error");
-  }
-};
-
-const deleteAttendance = async (id) => {
-  try {
-    const response = await axios.get(
-      `${API_URL}DeleteAttendanceById?attendanceid=` + id
-    );
-    return response.data;
-  } catch (error) {}
-};
-
-export {
-  getAllEmployee,
-  createEmployee,
-  updateEmployee,
-  deleteEmployee,
-  getAllAttendance,
-  addAttendance,
-  updateAttendance,
-  deleteAttendance,
-};
+export { getData, createData, updateData, deleteData };

@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import {
-  getAllEmployee,
-  getAllAttendance,
-  addAttendance,
-  deleteAttendance
+  getData,
+  createData,
+  updateData,
+  deleteData,
 } from "../services/ApiService";
+import {
+  GET_EMPLOYEE_ENDPOINT,
+  GET_ATTENDANCE_ENDPOINT,
+  CREATE_ATTENDANCE_ENDPOINT,
+  UPDATE_ATTENDANCE_ENDPOINT,
+  DELETE_ATTENDANCE_ENDPOINT,
+} from "../constants/constant";
 
 const Attendance = () => {
   const [empList, setEmpList] = useState([]);
@@ -25,13 +32,13 @@ const Attendance = () => {
   }, []);
 
   const getEmployees = () => {
-    getAllEmployee().then((result) => {
+    getData(GET_EMPLOYEE_ENDPOINT).then((result) => {
       setEmpList(result.data);
     });
   };
 
   const getAttendance = () => {
-    getAllAttendance().then((result) => {
+    getData(GET_ATTENDANCE_ENDPOINT).then((result) => {
       setAttendanceList(result.data);
     });
   };
@@ -42,7 +49,7 @@ const Attendance = () => {
 
   const saveAttendance = () => {
     setIsFormSubmitted(true);
-    addAttendance(attendanceObj).then((result) => {
+    createData(CREATE_ATTENDANCE_ENDPOINT, attendanceObj).then((result) => {
       if (result.result) {
         alert("Attendance Saved Successfully");
         getAttendance();
@@ -56,17 +63,27 @@ const Attendance = () => {
     setAttendanceObj(empObj);
   };
 
-  const updateAttendance = () => {};
+  const updateAttendance = () => {
+    setIsFormSubmitted(true);
+    updateData(UPDATE_ATTENDANCE_ENDPOINT, attendanceObj).then((result) => {
+      if (result.result) {
+        alert("Attendance Updated Successfully");
+        getAttendance();
+      } else {
+        alert(result.message);
+      }
+    });
+  };
 
   const onDelete = (attendanceId) => {
-    deleteAttendance(attendanceId).then(result => {
-      if(result.result){
-        alert("Attendance deleted successfully")
-        getAllAttendance();
-      }else{
-        alert(result.message)
+    deleteData(DELETE_ATTENDANCE_ENDPOINT, attendanceId).then((result) => {
+      if (result.result) {
+        alert("Attendance deleted successfully");
+        getAttendance();
+      } else {
+        alert(result.message);
       }
-    })
+    });
   };
 
   const onReset = () => {

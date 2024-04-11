@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import {
-  getAllEmployee,
-  createEmployee,
-  updateEmployee,
-  deleteEmployee,
+  getData,
+  createData,
+  updateData,
+  deleteData,
 } from "../services/ApiService";
+import {
+  GET_EMPLOYEE_ENDPOINT,
+  CREATE_EMPLOYEE_ENDPOINT,
+  UPDATE_EMPLOYEE_ENDPOINT,
+  DELETE_EMPLOYEE_ENDPOINT,
+} from "../constants/constant";
 
 const Employee = () => {
   const [empObj, setEmpObj] = useState({
@@ -33,7 +39,7 @@ const Employee = () => {
   }, []);
 
   const getEmployees = () => {
-    getAllEmployee().then((result) => {
+    getData(GET_EMPLOYEE_ENDPOINT).then((result) => {
       setEmpList(result.data);
     });
   };
@@ -60,7 +66,7 @@ const Employee = () => {
       empObj.ifsc !== "" &&
       empObj.salary !== ""
     ) {
-      createEmployee(empObj).then((result) => {
+      createData(CREATE_EMPLOYEE_ENDPOINT, empObj).then((result) => {
         if (result.result) {
           alert("Employee created successfully");
           getEmployees();
@@ -93,7 +99,7 @@ const Employee = () => {
   };
 
   const updateEmp = () => {
-    updateEmployee(empObj).then((result) => {
+    updateData(UPDATE_EMPLOYEE_ENDPOINT, empObj).then((result) => {
       if (result.result) {
         alert("Employee Updated Successfully");
         getEmployees();
@@ -121,7 +127,7 @@ const Employee = () => {
   };
 
   const onDelete = (empId) => {
-    deleteEmployee(empId).then((result) => {
+    deleteData(DELETE_EMPLOYEE_ENDPOINT, empId).then((result) => {
       if (result.result) {
         alert("Employee Deleted Successfully");
         getEmployees();
@@ -132,7 +138,7 @@ const Employee = () => {
   };
 
   const onReset = () => {
-    setIsFormSubmitted(false)
+    setIsFormSubmitted(false);
     setEmpObj({
       empId: 0,
       empName: "",
