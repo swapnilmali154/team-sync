@@ -390,17 +390,12 @@ const Employee = () => {
                 <th>Id</th>
                 <th>Name</th>
                 <th>Contact No</th>
-                {/* <th>Alt Contact No</th> */}
                 <th>Email</th>
-                {/* <th>Address Line 1</th>
-                <th>Address Line 2</th> */}
                 <th>Pincode</th>
                 <th>City</th>
                 <th>State</th>
                 <th>Bank Name</th>
-                {/* <th>IFSC</th> */}
                 <th>Account No</th>
-                {/* <th>Bank Branch</th> */}
                 <th>Salary</th>
                 <th>Action</th>
               </tr>
@@ -412,17 +407,12 @@ const Employee = () => {
                     <td>{index + 1}</td>
                     <td>{emp.empName}</td>
                     <td>{emp.empContactNo}</td>
-                    {/* <td>{emp.empAltContactNo}</td> */}
                     <td>{emp.empEmail}</td>
-                    {/* <td>{emp.addressLine1}</td>
-                    <td>{emp.addressLine2}</td> */}
                     <td>{emp.pincode}</td>
                     <td>{emp.city}</td>
                     <td>{emp.state}</td>
                     <td>{emp.bankName}</td>
-                    {/* <td>{emp.ifsc}</td> */}
                     <td>{emp.accountNo}</td>
-                    {/* <td>{emp.bankBranch}</td> */}
                     <td>{emp.salary}</td>
                     <td>
                       <button
