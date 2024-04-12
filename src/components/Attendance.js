@@ -23,7 +23,7 @@ const Attendance = () => {
     attendanceDate: "",
     inTime: "",
     outTime: "",
-    isFullDay: true,
+    isFullDay: false,
   });
 
   useEffect(() => {
@@ -47,6 +47,10 @@ const Attendance = () => {
     setAttendanceObj((prevObj) => ({ ...prevObj, [key]: event.target.value }));
   };
 
+  const updateCheckboxValue = (event, key) =>{
+    setAttendanceObj((prevObj)=> ({...prevObj, [key]: event.target.checked}));
+  }
+
   const saveAttendance = () => {
     setIsFormSubmitted(true);
     createData(CREATE_ATTENDANCE_ENDPOINT, attendanceObj).then((result) => {
@@ -59,8 +63,9 @@ const Attendance = () => {
           attendanceDate: "",
           inTime: "",
           outTime: "",
-          isFullDay: true,
+          isFullDay: false,
         });
+        setIsFormSubmitted(false);
       } else {
         alert(result.message);
       }
@@ -83,8 +88,9 @@ const Attendance = () => {
           attendanceDate: "",
           inTime: "",
           outTime: "",
-          isFullDay: true,
+          isFullDay: false,
         });
+        setIsFormSubmitted(false);
       } else {
         alert(result.message);
       }
@@ -109,7 +115,7 @@ const Attendance = () => {
       attendanceDate: "",
       inTime: "",
       outTime: "",
-      isFullDay: true,
+      isFullDay: false,
     });
     setIsFormSubmitted(false);
   };
@@ -174,6 +180,19 @@ const Attendance = () => {
                 placeholder="Out Time"
               />
               {isFormSubmitted && attendanceObj.outTime === "" && (
+                <div className="text-danger">This is required.</div>
+              )}
+            </div>
+            <div className="col-4">
+              <label>Full Day Present:</label><br></br>
+              <input
+                type="checkbox"
+                className=""
+                checked={attendanceObj.isFullDay}
+                onChange={(event) => updateCheckboxValue(event, "isFullDay")}
+                placeholder="Is Full Day"
+              />
+              {isFormSubmitted && attendanceObj.isFullDay === "" && (
                 <div className="text-danger">This is required.</div>
               )}
             </div>
