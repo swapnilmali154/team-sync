@@ -22,7 +22,7 @@ const Advance = () => {
     employeeId: 0,
     advanceDate: "",
     advanceAmount: 0,
-    reason: "string",
+    reason: "",
   });
 
   useEffect(() => {
@@ -52,6 +52,14 @@ const Advance = () => {
       if (result.result) {
         alert("Advance Saved Successfully");
         getAdvance();
+        setAdvanceObj({
+          advanceId: 0,
+          employeeId: 0,
+          advanceDate: "",
+          advanceAmount: 0,
+          reason: "",
+        });
+        setIsFormSubmitted(false);
       } else {
         alert(result.message);
       }
@@ -68,14 +76,22 @@ const Advance = () => {
       if (result.result) {
         alert("Advance Updated Successfully");
         getAdvance();
+        setAdvanceObj({
+          advanceId: 0,
+          employeeId: 0,
+          advanceDate: "",
+          advanceAmount: 0,
+          reason: "",
+        });
+        setIsFormSubmitted(false);
       } else {
         alert(result.message);
       }
     });
   };
 
-  const onDelete = (attendanceId) => {
-    deleteData(DELETE_ADVANCE_ENDPOINT, attendanceId).then((result) => {
+  const onDelete = (advanceId) => {
+    deleteData(DELETE_ADVANCE_ENDPOINT, advanceId).then((result) => {
       if (result.result) {
         alert("Advance deleted successfully");
         getAdvance();
@@ -91,8 +107,9 @@ const Advance = () => {
       employeeId: 0,
       advanceDate: "",
       advanceAmount: 0,
-      reason: "string",
+      reason: "",
     });
+    setIsFormSubmitted(false);
   };
 
   return (
@@ -122,7 +139,7 @@ const Advance = () => {
               <input
                 type="date"
                 className="form-control"
-                value={advanceObj.advanceDate}
+                value={advanceObj.advanceDate.split("T")[0]}
                 onChange={(event) => updateFormValue(event, "advanceDate")}
                 placeholder="Advance Date"
               />
@@ -218,7 +235,7 @@ const Advance = () => {
                       </button>
                       <button
                         className="btn btn-sm btn-primary"
-                        onClick={() => onDelete(adv.attendanceId)}
+                        onClick={() => onDelete(adv.advanceId)}
                       >
                         Delete
                       </button>

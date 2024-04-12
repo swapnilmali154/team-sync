@@ -53,6 +53,14 @@ const Attendance = () => {
       if (result.result) {
         alert("Attendance Saved Successfully");
         getAttendance();
+        setAttendanceObj({
+          attendanceId: 0,
+          employeeId: 0,
+          attendanceDate: "",
+          inTime: "",
+          outTime: "",
+          isFullDay: true,
+        });
       } else {
         alert(result.message);
       }
@@ -69,6 +77,14 @@ const Attendance = () => {
       if (result.result) {
         alert("Attendance Updated Successfully");
         getAttendance();
+        setAttendanceObj({
+          attendanceId: 0,
+          employeeId: 0,
+          attendanceDate: "",
+          inTime: "",
+          outTime: "",
+          isFullDay: true,
+        });
       } else {
         alert(result.message);
       }
@@ -95,6 +111,7 @@ const Attendance = () => {
       outTime: "",
       isFullDay: true,
     });
+    setIsFormSubmitted(false);
   };
 
   return (
@@ -124,7 +141,7 @@ const Attendance = () => {
               <input
                 type="date"
                 className="form-control"
-                value={attendanceObj.attendanceDate}
+                value={attendanceObj.attendanceDate.split("T")[0]}
                 onChange={(event) => updateFormValue(event, "attendanceDate")}
                 placeholder="Attendance Date"
               />
@@ -137,7 +154,7 @@ const Attendance = () => {
               <input
                 type="date"
                 className="form-control"
-                value={attendanceObj.inTime}
+                value={attendanceObj.inTime.split("T")[0]}
                 onChange={(event) => updateFormValue(event, "inTime")}
                 placeholder="In Time"
               />
@@ -152,7 +169,7 @@ const Attendance = () => {
               <input
                 type="date"
                 className="form-control"
-                value={attendanceObj.outTime}
+                value={attendanceObj.outTime.split("T")[0]}
                 onChange={(event) => updateFormValue(event, "outTime")}
                 placeholder="Out Time"
               />

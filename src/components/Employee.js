@@ -87,6 +87,7 @@ const Employee = () => {
             bankBranch: "",
             salary: 0,
           });
+          setIsFormSubmitted(false);
         } else {
           alert(result.message);
         }
@@ -99,6 +100,7 @@ const Employee = () => {
   };
 
   const updateEmp = () => {
+    setIsFormSubmitted(true);
     updateData(UPDATE_EMPLOYEE_ENDPOINT, empObj).then((result) => {
       if (result.result) {
         alert("Employee Updated Successfully");
@@ -120,6 +122,7 @@ const Employee = () => {
           bankBranch: "",
           salary: 0,
         });
+        setIsFormSubmitted(false);
       } else {
         alert(result.message);
       }
