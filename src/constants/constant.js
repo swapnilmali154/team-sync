@@ -15,3 +15,7 @@ export const CREATE_ADVANCE_ENDPOINT = "AddAdvance";
 export const UPDATE_ADVANCE_ENDPOINT = "UpdateAdvance";
 export const DELETE_ADVANCE_ENDPOINT = "DeleteAdvanceById?advanceid=";
 
+export const GET_LEAVES_ENDPOINT = "GetAllLeaves";
+export const CREATE_LEAVES_ENDPOINT = "AddLeave";
+export const UPDATE_LEAVES_ENDPOINT = "UpdateLeave";
+export const DELETE_LEAVES_ENDPOINT = "DeleteLeaveById?leaveid=";

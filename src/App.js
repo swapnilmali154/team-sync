@@ -4,6 +4,7 @@ import Advance from "./components/Advance";
 import Attendance from "./components/Attendance";
 import Salary from "./components/Salary";
 import Dashboard from "./components/Dashboard";
+import Leaves from "./components/Leaves";
 
 function App() {
   return (
@@ -40,6 +41,9 @@ function App() {
                 <Link className="nav-link" to="/advance">
                   Advance
                 </Link>
+                <Link className="nav-link" to="/leaves">
+                  Leaves
+                </Link>
                 <Link className="nav-link" to="/salary">
                   Salary
                 </Link>
@@ -52,6 +56,7 @@ function App() {
           <Route path="/employee" element={<Employee></Employee>}></Route>
           <Route path="/attendance" element={<Attendance></Attendance>}></Route>
           <Route path="/advance" element={<Advance></Advance>}></Route>
+          <Route path="/leaves" element={<Leaves></Leaves>}></Route>
           <Route path="/salary" element={<Salary></Salary>}></Route>
         </Routes>
       </BrowserRouter>
