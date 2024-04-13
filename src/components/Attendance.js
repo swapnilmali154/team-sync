@@ -250,7 +250,7 @@ const Attendance = () => {
                     <td>{attend.empName}</td>
                     <td>{attend.empContactNo}</td>
                     <td>{attend.employeeId}</td>
-                    <td>{attend.attendanceDate}</td>
+                    <td>{attend.attendanceDate.split("T")[0]}</td>
                     <td>{attend.attendanceId}</td>
                     <td>{attend.inTime}</td>
                     <td>{attend.outTime}</td>

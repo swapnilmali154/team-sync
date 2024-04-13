@@ -222,7 +222,7 @@ const Advance = () => {
                     <td>{adv.empName}</td>
                     <td>{adv.empContactNo}</td>
                     <td>{adv.employeeId}</td>
-                    <td>{adv.advanceDate}</td>
+                    <td>{adv.advanceDate.split("T")[0]}</td>
                     <td>{adv.advanceAmount}</td>
                     <td>{adv.advanceId}</td>
                     <td>{adv.reason}</td>
